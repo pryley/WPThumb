@@ -64,7 +64,10 @@ class WP_Thumb {
 	private static function uploadDir() {
 
 		if ( empty( self::$wp_upload_dir ) ) {
-			self::$wp_upload_dir = wp_upload_dir();
+			$wp_upload_dir = wp_upload_dir();
+			$wp_upload_dir['url'] = set_url_scheme( $wp_upload_dir['url'] );
+			$wp_upload_dir['baseurl'] = set_url_scheme( $wp_upload_dir['baseurl'] );
+			self::$wp_upload_dir = $wp_upload_dir;
 		}
 
 		// if blogs are ever switched we need to clear the cache
