@@ -783,3 +783,41 @@ function wpthumb_add_image_editors( $editors ) {
 }
 
 add_filter( 'wp_image_editors', 'wpthumb_add_image_editors' );
+
+function wpthumb_create_args_from_size( $args = '' ) {
+
+	if( !is_string( $args )) {
+		return $args;
+	}
+
+	$new_args = array();
+	$additional_sizes = wp_get_additional_image_sizes();
+
+	if ( 'thumbnail' === $args ) {
+		$new_args = array(
+			'width'  => get_option( 'thumbnail_size_w' ),
+			'height' => get_option( 'thumbnail_size_h' ),
+			'crop'   => get_option( 'thumbnail_crop' ),
+		);
+	} elseif ( 'medium' === $args ) {
+		$new_args = array(
+			'width'  => get_option( 'medium_size_w' ),
+			'height' => get_option( 'medium_size_h' ),
+		);
+	} elseif ( 'large' === $args ) {
+		$new_args = array(
+			'width'  => get_option( 'large_size_w' ),
+			'height' => get_option( 'large_size_h' ),
+		);
+	} elseif ( array_key_exists( $args, $additional_sizes )) {
+		$new_args = $additional_sizes[$args];
+	}
+
+	if ( ! empty( $new_args ) && ! empty( $new_args['width'] ) && ! empty( $new_args['height'] ) ) {
+		return $new_args;
+	}
+
+	return $args;
+}
+
+add_filter( 'wpthumb_create_args_from_size', 'wpthumb_create_args_from_size' );
