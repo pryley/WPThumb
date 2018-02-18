@@ -433,9 +433,6 @@ class WP_Thumb {
 			// Save the converted image
 			$editor->save( $new_filepath, 'image/png' );
 
-			// Apply JPEG quality settings args
-			$editor->set_quality( $this->args['jpeg_quality'] );
-
 			// Pass the new file back through the function so they are resized
 			return new WP_Thumb( $new_filepath, array_merge( $this->args, array(
 				'output_file' => $new_filepath,
@@ -445,6 +442,9 @@ class WP_Thumb {
 		endif;
 
 		apply_filters( 'wpthumb_image_pre', $editor, $this->args );
+
+		// Apply JPEG quality settings args
+		$editor->set_quality( $this->args['jpeg_quality'] );
 
 		if (is_array($this->args)) extract( $this->args );
 
