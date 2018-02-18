@@ -1,9 +1,9 @@
 === WPThumb ===
-Contributors: humanmade, joehoyle, mattheu, tcrsavage, willmot
+Contributors: humanmade, joehoyle, mattheu, tcrsavage, willmot, pryley
 Tags: image, resize, thumbnail, crop, phpthumb
 Requires at least: 3.5
-Tested up to: 3.8.1
 Stable tag: 0.10
+Tested up to: 4.9
 
 An on-demand image generation replacement for WordPress' image resizing.
 
