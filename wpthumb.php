@@ -373,7 +373,10 @@ class WP_Thumb {
 			return '';
 
 		// Generate a short unique filename
-		$serialize = crc32( serialize( array_merge( $this->getArgs(), array( $this->getFilePath() ) ) ) );
+		$serialize = crc32( serialize( array_merge(
+			$this->getArgs(),
+			array( _wp_relative_upload_path( $this->getFilePath() ) )
+		) ) );
 
 		// Gifs are converted to pngs
 		if ( $this->getFileExtension() == 'gif' )
