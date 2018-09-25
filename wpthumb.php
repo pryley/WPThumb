@@ -641,7 +641,8 @@ function wpthumb_post_image( $null, $id, $args ) {
 	if ( is_string( $args ) && ! strpos( (string) $args, '=' ) ) {
 
 		// if there are no "special" wpthumb args, then we shouldn't bother creating a WP Thumb, just use the WordPress one
-		if ( $args === ( $args = apply_filters( 'wpthumb_create_args_from_size', $args ) ) )
+		$oldArgs = $args;
+		if ( $oldArgs === ( $args = apply_filters( 'wpthumb_create_args_from_size', $args ) ) )
 			return $null;
 	}
 
